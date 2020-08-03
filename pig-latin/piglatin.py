@@ -24,7 +24,21 @@ def pig_latin(phrase):
         >>> pig_latin('hello awesome programmer')
         'ellohay awesomeyay rogrammerpay'
     """
+    vowels = 'aeiou'
+    list_of_words = phrase.split(' ')
+    new_phrase = ''
 
+    for word in list_of_words:
+        result = word[:1]
+        if result in vowels:
+            word = word + 'yay'
+            new_phrase += word + ' '
+            
+        else:
+            word = word[1:] + word[0] + 'ay'
+            new_phrase += word + ' '
+           
+    return new_phrase.strip()
 
 if __name__ == '__main__':
     import doctest
