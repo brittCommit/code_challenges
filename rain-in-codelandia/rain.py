@@ -61,10 +61,42 @@ Should also work with floats::
     3.6
 """
 
+def tallest_to_left(buildings):
+    ret = []
+    tallest_so_far = 0
+    for b in buildings:
+        ret.append(tallest_so_far)
+        if b > tallest_so_far:
+            tallest_so_far = b
+    return ret
+
+def tallest_to_right(buildings):
+    return tallest_to_left(buildings[::-1])[::-1]
+  
+def min_height(tall_left, tall_right):
+    ret = []
+    for i in range(len(tall_left)):
+        ret.append(min(tall_left[i], tall_right[i]))
+    return ret
+
+def add_water(buildings, min_b_height):
+    ret = []
+    for i in range(len(buildings)):
+        if min_b_height[i] > buildings[i]:
+            ret.append(min_b_height[i] - buildings[i])
+        else:
+            ret.append(0)
+    return ret
 
 def rain(buildings):
     """How much rain is trapped in Codelandia?"""
-
+  
+    tall_left = tallest_to_left(buildings)
+    tall_right = tallest_to_right(buildings)
+    min_building_height = min_height(tall_left, tall_right)
+    water = add_water(buildings, min_building_height)
+    return sum(water)
+        
 if __name__ == '__main__':
     import doctest
     if doctest.testmod().failed == 0:
