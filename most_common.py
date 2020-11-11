@@ -21,13 +21,10 @@ def mostCommonWord(paragraph, banned):
     while not found:
         x = word_dict.most_common(1)
         word = x[0][0]
-        if not word.isalpha():
-            word_dict.pop(word)
         if word in banned:
             word_dict.pop(word)
         else:
-            found = True
-            return word.lower()
+            return word
 
 if __name__ == '__main__':
     import doctest
