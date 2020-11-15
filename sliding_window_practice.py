@@ -21,6 +21,26 @@ def smallest_subarray_with_given_sum(s, arr):
     return 0    
   return min_length
 
+def max_sub_array_of_size_k(k, arr):
+    """
+    Given an array of positive numbers and a positive number ‘k,’ 
+    find the maximum sum of any contiguous subarray of size ‘k’.
+
+    >>> max_sub_array_of_size_k([2, 1, 5, 1, 3, 2], 3)
+    9
+    >>> max_sub_array_of_size_k([2, 3, 4, 1, 5], 2)
+    7
+    """
+  w_sum, w_start, max_sum = 0, 0, 0
+
+  for w_end in range(len(arr)):
+    w_sum += arr[w_end]
+    if w_end >= k-1:
+      max_sum = max(max_sum, w_sum)
+      w_sum -= arr[w_start]
+      w_start += 1
+  return max_sum
+
 if __name__ == '__main__':
     import doctest
     if doctest.testmod().failed == 0:
